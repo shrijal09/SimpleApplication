@@ -10,5 +10,8 @@ namespace SimpleApplication.Data
         }
 
         public DbSet<Configuration> Configurations { get; set; }
+
+        public DbSet<ApplicationConfiguration> ApplicationConfiguration { get; set; }
+        public DbSet<ConfigurationDefinition> ConfigurationDefinition { get; set; }
     }
 }

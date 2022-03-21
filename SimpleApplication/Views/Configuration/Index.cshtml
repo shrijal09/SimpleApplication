@@ -3,9 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="card mt-3">
+<h1 class="m-3">Configurations</h1>
 
-<h1>Index</h1>
-<a onclick="showInPopup('@Url.Action("AddOrEdit","Configuration",null,Context.Request.Scheme)','Create Configuration')" class="btn btn-info text-white">Create</a>
-<div id="view-all">
+<a onclick="showInPopup('@Url.Action("AddOrEdit","Configuration",null,Context.Request.Scheme)','Create Configuration')" class="btn btn-success w-25 m-3">Create</a>
+<div id="view-all" class="m-3">
     @await Html.PartialAsync("_ViewAll")
+</div>
 </div>
