@@ -15,68 +15,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = c:\Users\shrijal.byanjankar\source\repos\SimpleApplication\SimpleApplication
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ApplicationConfiguration/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25Db25maWd1cmF0aW9uXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ApplicationConfiguration/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25Db25maWd1cmF0aW9uXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ApplicationConfiguration/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25Db25maWd1cmF0aW9uXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ApplicationConfiguration/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25Db25maWd1cmF0aW9uXEVkaXQuY3NodG1s
+[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ApplicationConfiguration/AddOrEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25Db25maWd1cmF0aW9uXEFkZE9yRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ApplicationConfiguration/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25Db25maWd1cmF0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ConfigurationDefinition/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvbkRlZmluaXRpb25cQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ConfigurationDefinition/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvbkRlZmluaXRpb25cRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ConfigurationDefinition/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvbkRlZmluaXRpb25cRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ConfigurationDefinition/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvbkRlZmluaXRpb25cRWRpdC5jc2h0bWw=
+[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ConfigurationDefinition/AddOrEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvbkRlZmluaXRpb25cQWRkT3JFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/ConfigurationDefinition/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvbkRlZmluaXRpb25cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/Configuration/AddOrEdit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvblxBZGRPckVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/Configuration/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvblxDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/Configuration/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvblxEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/Configuration/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvblxEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/Configuration/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvblxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/Configuration/_ViewAll.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmlndXJhdGlvblxfVmlld0FsbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/shrijal.byanjankar/source/repos/SimpleApplication/SimpleApplication/Views/Home/Index.cshtml]

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SimpleApplication.Models;
+using Models;
 using System.Diagnostics;
 
 namespace SimpleApplication.Controllers

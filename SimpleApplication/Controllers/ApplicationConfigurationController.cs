@@ -3,152 +3,73 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SimpleApplication.Data;
-using SimpleApplication.Models;
+using Models;
 
 namespace SimpleApplication.Controllers
 {
     public class ApplicationConfigurationController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationConfigurationRepository _applicationConfigurationRepository;
 
-        public ApplicationConfigurationController(ApplicationDbContext context)
+        public ApplicationConfigurationController(IApplicationConfigurationRepository applicationConfigurationRepository)
         {
-            _context = context;
+            _applicationConfigurationRepository = applicationConfigurationRepository;
         }
 
         // GET: ApplicationConfiguration
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ApplicationConfiguration.ToListAsync());
+            return View(await _applicationConfigurationRepository.GetAllAsync());
         }
 
-        // GET: ApplicationConfiguration/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> AddOrEdit(int id=0)
         {
-            if (id == null)
+            if (id == 0)
             {
-                return NotFound();
+                return View(new ApplicationConfiguration());
             }
-
-            var applicationConfiguration = await _context.ApplicationConfiguration
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (applicationConfiguration == null)
+            else
             {
-                return NotFound();
-            }
-
-            return View(applicationConfiguration);
-        }
-
-        // GET: ApplicationConfiguration/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ApplicationConfiguration/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ApplicationCode,OrganizationID,ConfigurationDefinitionID,ConfigurationValue,DisabledDateTime")] ApplicationConfiguration applicationConfiguration)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(applicationConfiguration);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(applicationConfiguration);
-        }
-
-        // GET: ApplicationConfiguration/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var applicationConfiguration = await _context.ApplicationConfiguration.FindAsync(id);
-            if (applicationConfiguration == null)
-            {
-                return NotFound();
-            }
-            return View(applicationConfiguration);
-        }
-
-        // POST: ApplicationConfiguration/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ApplicationCode,OrganizationID,ConfigurationDefinitionID,ConfigurationValue,DisabledDateTime")] ApplicationConfiguration applicationConfiguration)
-        {
-            if (id != applicationConfiguration.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                var applicationConfiguration = await _applicationConfigurationRepository.GetByIdAsync(id);
+                if (applicationConfiguration == null)
                 {
-                    _context.Update(applicationConfiguration);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                return View(applicationConfiguration);
+            }
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEdit(int id, [Bind("ID,ApplicationCode,OrganizationID,ConfigurationDefinitionID,ConfigurationValue,DisabledDateTime")] ApplicationConfiguration applicationConfiguration)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == 0)
                 {
-                    if (!ApplicationConfigurationExists(applicationConfiguration.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    await _applicationConfigurationRepository.CreateApplicationConfigurationAsync(applicationConfiguration);
+                }
+                else
+                {
+                    await _applicationConfigurationRepository.UpdateApplicationConfigurationAsync(applicationConfiguration);
+                    
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(applicationConfiguration);
         }
 
-        // GET: ApplicationConfiguration/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var applicationConfiguration = await _context.ApplicationConfiguration
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (applicationConfiguration == null)
-            {
-                return NotFound();
-            }
-
-            return View(applicationConfiguration);
-        }
-
-        // POST: ApplicationConfiguration/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var applicationConfiguration = await _context.ApplicationConfiguration.FindAsync(id);
-            _context.ApplicationConfiguration.Remove(applicationConfiguration);
-            await _context.SaveChangesAsync();
+            _applicationConfigurationRepository.DeleteApplicationConfigurationAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ApplicationConfigurationExists(int id)
-        {
-            return _context.ApplicationConfiguration.Any(e => e.ID == id);
-        }
+    
     }
 }

@@ -47,12 +47,6 @@
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a asp-controller="Configuration" asp-action="Index" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Configuration</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
                             <a asp-controller="ApplicationConfiguration" asp-action="Index" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>App Configuration</span>
@@ -150,18 +144,34 @@
                 </main>
             </div>
 
-            <div class="modal" tabindex="-1" id="form-modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-     
-                  </div>
+            <!--bootstra pop up confirmation dialog-->
+            <div class="modal fade" id="delete-conformation" tabindex="-1" role="dialog" aria-labelledby="deleteconformation">
+                <div class="modal-dialog" style="width:501px !important;margin:0 auto;">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background:#d9534f;color:white;">
+                            <h4 class="modal-title" id="delete-conformation">
+                                Delete Confirmation
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <span>
+                                            Are you sure you want to delete?
+                                        </span>
+                                        <strong id="deletedValueName">
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-danger" value="Delete" onclick="deleteData()" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
     </div>

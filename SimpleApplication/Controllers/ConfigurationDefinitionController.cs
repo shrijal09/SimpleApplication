@@ -3,152 +3,72 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SimpleApplication.Data;
-using SimpleApplication.Models;
+using Models;
 
 namespace SimpleApplication.Controllers
 {
     public class ConfigurationDefinitionController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IConfigurationDefinitionRepository _configurationDefinitionRepository;
 
-        public ConfigurationDefinitionController(ApplicationDbContext context)
+        public ConfigurationDefinitionController(IConfigurationDefinitionRepository configurationDefinitionRepository)
         {
-            _context = context;
+            _configurationDefinitionRepository = configurationDefinitionRepository;
         }
 
         // GET: ConfigurationDefinition
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ConfigurationDefinition.ToListAsync());
+            return View(await _configurationDefinitionRepository.GetAllAsync());
         }
 
-        // GET: ConfigurationDefinition/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> AddOrEdit(int id=0)
         {
-            if (id == null)
+            if (id == 0)
             {
-                return NotFound();
+                return View(new ConfigurationDefinition());
             }
-
-            var configurationDefinition = await _context.ConfigurationDefinition
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (configurationDefinition == null)
+            else
             {
-                return NotFound();
-            }
-
-            return View(configurationDefinition);
-        }
-
-        // GET: ConfigurationDefinition/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ConfigurationDefinition/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ConfigurationType,ConfigurationDescription,DefaultValue,CreateUserID,CreateDateTime,LastUpdateUserID,LastUpdateDateTime")] ConfigurationDefinition configurationDefinition)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(configurationDefinition);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(configurationDefinition);
-        }
-
-        // GET: ConfigurationDefinition/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var configurationDefinition = await _context.ConfigurationDefinition.FindAsync(id);
-            if (configurationDefinition == null)
-            {
-                return NotFound();
-            }
-            return View(configurationDefinition);
-        }
-
-        // POST: ConfigurationDefinition/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ConfigurationType,ConfigurationDescription,DefaultValue,CreateUserID,CreateDateTime,LastUpdateUserID,LastUpdateDateTime")] ConfigurationDefinition configurationDefinition)
-        {
-            if (id != configurationDefinition.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                var configurationDefinition = await _configurationDefinitionRepository.GetByIdAsync(id);
+                if (configurationDefinition == null)
                 {
-                    _context.Update(configurationDefinition);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                return View(configurationDefinition);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEdit(int id, [Bind("ID,ConfigurationType,ConfigurationDescription,DefaultValue,CreateUserID,CreateDateTime,LastUpdateUserID,LastUpdateDateTime")] ConfigurationDefinition configurationDefinition)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == 0)
                 {
-                    if (!ConfigurationDefinitionExists(configurationDefinition.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    await _configurationDefinitionRepository.CreateConfigurationDefinitionAsync(configurationDefinition);
+                }
+                else
+                {
+                   
+                    await _configurationDefinitionRepository.UpdateConfigurationDefinitionAsync(configurationDefinition);
+                    
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(configurationDefinition);
         }
 
-        // GET: ConfigurationDefinition/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var configurationDefinition = await _context.ConfigurationDefinition
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (configurationDefinition == null)
-            {
-                return NotFound();
-            }
-
-            return View(configurationDefinition);
-        }
-
-        // POST: ConfigurationDefinition/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var configurationDefinition = await _context.ConfigurationDefinition.FindAsync(id);
-            _context.ConfigurationDefinition.Remove(configurationDefinition);
-            await _context.SaveChangesAsync();
+            _configurationDefinitionRepository.DeleteConfigurationDefinitionAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ConfigurationDefinitionExists(int id)
-        {
-            return _context.ConfigurationDefinition.Any(e => e.ID == id);
-        }
     }
 }

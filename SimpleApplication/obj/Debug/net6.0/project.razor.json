@@ -16298,8 +16298,8 @@
   "RootNamespace": "SimpleApplication",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ApplicationConfiguration\\Delete.cshtml",
-      "TargetPath": "Views\\ApplicationConfiguration\\Delete.cshtml",
+      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ConfigurationDefinition\\AddOrEdit.cshtml",
+      "TargetPath": "Views\\ConfigurationDefinition\\AddOrEdit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16313,28 +16313,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Configuration\\AddOrEdit.cshtml",
-      "TargetPath": "Views\\Configuration\\AddOrEdit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ApplicationConfiguration\\Create.cshtml",
-      "TargetPath": "Views\\ApplicationConfiguration\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Configuration\\Details.cshtml",
-      "TargetPath": "Views\\Configuration\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Configuration\\Create.cshtml",
-      "TargetPath": "Views\\Configuration\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16348,36 +16328,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ApplicationConfiguration\\Edit.cshtml",
-      "TargetPath": "Views\\ApplicationConfiguration\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Configuration\\Index.cshtml",
-      "TargetPath": "Views\\Configuration\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ConfigurationDefinition\\Edit.cshtml",
-      "TargetPath": "Views\\ConfigurationDefinition\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Configuration\\_ViewAll.cshtml",
-      "TargetPath": "Views\\Configuration\\_ViewAll.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ApplicationConfiguration\\Details.cshtml",
-      "TargetPath": "Views\\ApplicationConfiguration\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ConfigurationDefinition\\Details.cshtml",
-      "TargetPath": "Views\\ConfigurationDefinition\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
@@ -16388,21 +16338,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ConfigurationDefinition\\Create.cshtml",
-      "TargetPath": "Views\\ConfigurationDefinition\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ConfigurationDefinition\\Delete.cshtml",
-      "TargetPath": "Views\\ConfigurationDefinition\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Configuration\\Delete.cshtml",
-      "TargetPath": "Views\\Configuration\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
@@ -16410,6 +16345,11 @@
     {
       "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ApplicationConfiguration\\Index.cshtml",
       "TargetPath": "Views\\ApplicationConfiguration\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\SimpleApplication\\Views\\ApplicationConfiguration\\AddOrEdit.cshtml",
+      "TargetPath": "Views\\ApplicationConfiguration\\AddOrEdit.cshtml",
       "FileKind": "mvc"
     }
   ],

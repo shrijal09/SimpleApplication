@@ -10,7 +10,37 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "e62fa3a3-f2f0-4d4a-836d-fb906ed572e2": {
+      "ProjectGuid": "e62fa3a3-f2f0-4d4a-836d-fb906ed572e2",
+      "DisplayName": "Repository",
+      "ColorIndex": 1
+    },
+    "038fe2d1-4b20-4221-96a5-c8908d103e49": {
+      "ProjectGuid": "038fe2d1-4b20-4221-96a5-c8908d103e49",
+      "DisplayName": "DataAccess",
+      "ColorIndex": 2
+    },
+    "372ebbfe-84a0-4aa0-a558-9c019729c78f": {
+      "ProjectGuid": "372ebbfe-84a0-4aa0-a558-9c019729c78f",
+      "DisplayName": "DataAccessRepository",
+      "ColorIndex": 3
+    },
+    "8326b9fd-7587-4eb3-8aeb-6c925e1217d8": {
+      "ProjectGuid": "8326b9fd-7587-4eb3-8aeb-6c925e1217d8",
+      "DisplayName": "SimpleApplication.Models",
+      "ColorIndex": 4
+    },
+    "d5ffc772-a027-4dd6-807b-d4397d344fd3": {
+      "ProjectGuid": "d5ffc772-a027-4dd6-807b-d4397d344fd3",
+      "DisplayName": "DataAccess",
+      "ColorIndex": 5
+    },
+    "f5373d86-027f-4dd3-9743-949977e00aaa": {
+      "ProjectGuid": "f5373d86-027f-4dd3-9743-949977e00aaa",
+      "DisplayName": "Models",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 7
 }

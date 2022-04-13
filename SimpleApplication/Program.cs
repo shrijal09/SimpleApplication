@@ -1,5 +1,7 @@
+using DataAccess;
+using DataAccess.Services.Interfaces;
+using DataAccess.Services.Repository;
 using Microsoft.EntityFrameworkCore;
-using SimpleApplication.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnections")
     ));
+
+builder.Services.AddScoped<IApplicationConfigurationRepository, ApplicationConfigurationRepository>();
+builder.Services.AddScoped<IConfigurationDefinitionRepository, ConfigurationDefinitionRepository>();
+
 
 var app = builder.Build();
 
