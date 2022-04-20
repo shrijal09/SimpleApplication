@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.Services.Interfaces;
+using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,20 +13,20 @@ namespace SimpleApplication.Controllers
 {
     public class ApplicationConfigurationController : Controller
     {
-        private readonly IApplicationConfigurationRepository _applicationConfigurationRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ApplicationConfigurationController(IApplicationConfigurationRepository applicationConfigurationRepository)
+        public ApplicationConfigurationController(IUnitOfWork unitOfWork)
         {
-            _applicationConfigurationRepository = applicationConfigurationRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        // GET: ApplicationConfiguration
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _applicationConfigurationRepository.GetAllAsync());
+            IEnumerable<ApplicationConfiguration> objApplicationConfigurationList = _unitOfWork.AppConfig.GetAll();
+            return View(objApplicationConfigurationList);
         }
 
-        public async Task<IActionResult> AddOrEdit(int id=0)
+        public IActionResult AddOrEdit(int id=0)
         {
             if (id == 0)
             {
@@ -34,7 +34,7 @@ namespace SimpleApplication.Controllers
             }
             else
             {
-                var applicationConfiguration = await _applicationConfigurationRepository.GetByIdAsync(id);
+                var applicationConfiguration = _unitOfWork.AppConfig.GetById(id);
                 if (applicationConfiguration == null)
                 {
                     return NotFound();
@@ -46,17 +46,19 @@ namespace SimpleApplication.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit(int id, [Bind("ID,ApplicationCode,OrganizationID,ConfigurationDefinitionID,ConfigurationValue,DisabledDateTime")] ApplicationConfiguration applicationConfiguration)
+        public IActionResult AddOrEdit(int id, [Bind("ID,ApplicationCode,OrganizationID,ConfigurationDefinitionID,ConfigurationValue,DisabledDateTime")] ApplicationConfiguration applicationConfiguration)
         {
             if (ModelState.IsValid)
             {
                 if (id == 0)
                 {
-                    await _applicationConfigurationRepository.CreateApplicationConfigurationAsync(applicationConfiguration);
+                    _unitOfWork.AppConfig.Add(applicationConfiguration);
+                    _unitOfWork.Save();
                 }
                 else
                 {
-                    await _applicationConfigurationRepository.UpdateApplicationConfigurationAsync(applicationConfiguration);
+                    _unitOfWork.AppConfig.Update(applicationConfiguration);
+                    _unitOfWork.Save();
                     
                 }
                 return RedirectToAction(nameof(Index));
@@ -66,7 +68,8 @@ namespace SimpleApplication.Controllers
 
         public IActionResult Delete(int id)
         {
-            _applicationConfigurationRepository.DeleteApplicationConfigurationAsync(id);
+            _unitOfWork.AppConfig.Delete(id);
+            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 

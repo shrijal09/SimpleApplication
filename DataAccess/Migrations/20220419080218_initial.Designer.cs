@@ -9,22 +9,22 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace SimpleApplication.Migrations
+namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220321085716_config")]
-    partial class config
+    [Migration("20220419080218_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("SimpleApplication.Models.ApplicationConfiguration", b =>
+            modelBuilder.Entity("Models.ApplicationConfiguration", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -34,14 +34,16 @@ namespace SimpleApplication.Migrations
 
                     b.Property<string>("ApplicationCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
 
                     b.Property<int>("ConfigurationDefinitionID")
                         .HasColumnType("int");
 
                     b.Property<string>("ConfigurationValue")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime?>("DisabledDateTime")
                         .HasColumnType("datetime2");
@@ -54,32 +56,7 @@ namespace SimpleApplication.Migrations
                     b.ToTable("ApplicationConfiguration");
                 });
 
-            modelBuilder.Entity("SimpleApplication.Models.Configuration", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Application")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfigName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfigValue")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Configurations");
-                });
-
-            modelBuilder.Entity("SimpleApplication.Models.ConfigurationDefinition", b =>
+            modelBuilder.Entity("Models.ConfigurationDefinition", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -88,11 +65,13 @@ namespace SimpleApplication.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("ConfigurationDescription")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ConfigurationType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreateDateTime")
                         .HasColumnType("datetime2");
@@ -101,7 +80,8 @@ namespace SimpleApplication.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DefaultValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime>("LastUpdateDateTime")
                         .HasColumnType("datetime2");
@@ -112,6 +92,35 @@ namespace SimpleApplication.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("ConfigurationDefinition");
+                });
+
+            modelBuilder.Entity("Models.SSIS_Config", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ConfigurationFilter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ConfiguredValue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("ConfiguredValueType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("PackagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SSIS_Config");
                 });
 #pragma warning restore 612, 618
         }

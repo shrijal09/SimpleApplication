@@ -1,6 +1,6 @@
 using DataAccess;
-using DataAccess.Services.Interfaces;
-using DataAccess.Services.Repository;
+using DataAccess.Repository;
+using DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnections")
     ));
 
-builder.Services.AddScoped<IApplicationConfigurationRepository, ApplicationConfigurationRepository>();
-builder.Services.AddScoped<IConfigurationDefinitionRepository, ConfigurationDefinitionRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 var app = builder.Build();

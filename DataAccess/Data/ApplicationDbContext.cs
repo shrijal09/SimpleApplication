@@ -9,9 +9,8 @@ namespace DataAccess
         {
         }
 
-        public DbSet<Configuration> Configurations { get; set; }
-
         public DbSet<ApplicationConfiguration> ApplicationConfiguration { get; set; }
         public DbSet<ConfigurationDefinition> ConfigurationDefinition { get; set; }
+        public DbSet<SSIS_Config> SSIS_Config { get; set; }
     }
 }

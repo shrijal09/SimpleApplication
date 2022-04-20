@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.Services.Interfaces;
+using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,20 +13,21 @@ namespace SimpleApplication.Controllers
 {
     public class ConfigurationDefinitionController : Controller
     {
-        private readonly IConfigurationDefinitionRepository _configurationDefinitionRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ConfigurationDefinitionController(IConfigurationDefinitionRepository configurationDefinitionRepository)
+        public ConfigurationDefinitionController(IUnitOfWork unitOfWork)
         {
-            _configurationDefinitionRepository = configurationDefinitionRepository;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: ConfigurationDefinition
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _configurationDefinitionRepository.GetAllAsync());
+            IEnumerable<ConfigurationDefinition> objConfigurationDefinitionList = _unitOfWork.ConfigDefinition.GetAll();
+            return View(objConfigurationDefinitionList);
         }
 
-        public async Task<IActionResult> AddOrEdit(int id=0)
+        public IActionResult AddOrEdit(int id=0)
         {
             if (id == 0)
             {
@@ -34,7 +35,7 @@ namespace SimpleApplication.Controllers
             }
             else
             {
-                var configurationDefinition = await _configurationDefinitionRepository.GetByIdAsync(id);
+                var configurationDefinition = _unitOfWork.ConfigDefinition.GetById(id);
                 if (configurationDefinition == null)
                 {
                     return NotFound();
@@ -45,19 +46,19 @@ namespace SimpleApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit(int id, [Bind("ID,ConfigurationType,ConfigurationDescription,DefaultValue,CreateUserID,CreateDateTime,LastUpdateUserID,LastUpdateDateTime")] ConfigurationDefinition configurationDefinition)
+        public IActionResult AddOrEdit(int id, [Bind("ID,ConfigurationType,ConfigurationDescription,DefaultValue,CreateUserID,CreateDateTime,LastUpdateUserID,LastUpdateDateTime")] ConfigurationDefinition configurationDefinition)
         {
             if (ModelState.IsValid)
             {
                 if (id == 0)
                 {
-                    await _configurationDefinitionRepository.CreateConfigurationDefinitionAsync(configurationDefinition);
+                    _unitOfWork.ConfigDefinition.Add(configurationDefinition);
+                    _unitOfWork.Save();
                 }
                 else
                 {
-                   
-                    await _configurationDefinitionRepository.UpdateConfigurationDefinitionAsync(configurationDefinition);
-                    
+                    _unitOfWork.ConfigDefinition.Update(configurationDefinition);
+                    _unitOfWork.Save();
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -66,7 +67,8 @@ namespace SimpleApplication.Controllers
 
         public IActionResult Delete(int id)
         {
-            _configurationDefinitionRepository.DeleteConfigurationDefinitionAsync(id);
+            _unitOfWork.ConfigDefinition.Delete(id);
+            _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 
