@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\Models\\Models.csproj": {}
+    "C:\\Users\\shrijal.byanjankar\\SimpleApplication\\Models\\Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\Models\\Models.csproj": {
+    "C:\\Users\\shrijal.byanjankar\\SimpleApplication\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\shrijal.byanjankar\\SimpleApplication\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\shrijal.byanjankar\\SimpleApplication\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\shrijal.byanjankar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shrijal.byanjankar\\source\\repos\\SimpleApplication\\Models\\obj\\",
+        "outputPath": "C:\\Users\\shrijal.byanjankar\\SimpleApplication\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\shrijal.byanjankar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.4, )"
@@ -70,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.108\\RuntimeIdentifierGraph.json"
         }
       }
     }

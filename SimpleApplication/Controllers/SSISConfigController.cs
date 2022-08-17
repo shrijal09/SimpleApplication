@@ -1,4 +1,7 @@
-﻿using DataAccess.Repository.IRepository;
+﻿using DataAccess.Features.SSISConfigs.Request.Commands;
+using DataAccess.Features.SSISConfigs.Request.Queries;
+using DataAccess.Repository.IRepository;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -6,19 +9,21 @@ namespace SimpleApplication.Controllers
 {
     public class SSISConfigController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
-        public SSISConfigController(IUnitOfWork unitOfWork)
+        public SSISConfigController(IMediator mediator)
         {
-            _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult<List<SSIS_Config>>> Index()
         {
-            IEnumerable<SSIS_Config> obj = _unitOfWork.SSISConfiguration.GetAll();
-            return View(obj);
+            var ssisConfig = await _mediator.Send(new GetSSISConfigListRequest());
+            return View(ssisConfig);
         }
 
-        public IActionResult AddOrEdit(int id = 0)
+        [HttpGet]
+        public async Task<ActionResult<List<SSIS_Config>>> AddOrEdit(int id = 0)
         {
             if (id == 0)
             {
@@ -26,7 +31,7 @@ namespace SimpleApplication.Controllers
             }
             else
             {
-                var ssisConfig = _unitOfWork.SSISConfiguration.GetById(id);
+                var ssisConfig = await _mediator.Send(new GetSSISConfigDetailRequest { Id = id });
                 if (ssisConfig == null)
                 {
                     return NotFound();
@@ -44,13 +49,13 @@ namespace SimpleApplication.Controllers
             {
                 if (id == 0)
                 {
-                    _unitOfWork.SSISConfiguration.Add(ssisConfig);
-                    _unitOfWork.Save();
+                    var command = new CreateSSISConfigCommand { ssisConfig = ssisConfig };
+                    _mediator.Send(command);
                 }
                 else
                 {
-                    _unitOfWork.SSISConfiguration.Update(ssisConfig);
-                    _unitOfWork.Save();
+                    var command = new UpdateSSISConfigCommand { ssisConfig = ssisConfig };
+                    _mediator.Send(command);
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -59,8 +64,8 @@ namespace SimpleApplication.Controllers
 
         public IActionResult Delete(int id)
         {
-            _unitOfWork.SSISConfiguration.Delete(id);
-            _unitOfWork.Save();
+            var command = new DeleteSSISConfigCommand { Id = id };
+            _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
     }

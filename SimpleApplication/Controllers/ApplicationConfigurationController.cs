@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Features.ApplicationConfigurations.Request;
+using DataAccess.Features.ApplicationConfigurations.Request.Commands;
 using DataAccess.Repository.IRepository;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,20 +16,21 @@ namespace SimpleApplication.Controllers
 {
     public class ApplicationConfigurationController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
-        public ApplicationConfigurationController(IUnitOfWork unitOfWork)
+        public ApplicationConfigurationController(IMediator mediator)
         {
-            _unitOfWork = unitOfWork;
+            _mediator = mediator;
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<ApplicationConfiguration>>> Index()
+        {
+            var applicationConfiguration = await _mediator.Send(new GetApplicationConfigurationListRequest());
+            return View(applicationConfiguration);
         }
 
-        public IActionResult Index()
-        {
-            IEnumerable<ApplicationConfiguration> objApplicationConfigurationList = _unitOfWork.AppConfig.GetAll();
-            return View(objApplicationConfigurationList);
-        }
-
-        public IActionResult AddOrEdit(int id=0)
+        [HttpGet]
+        public async Task<ActionResult<List<ApplicationConfiguration>>> AddOrEdit(int id=0)
         {
             if (id == 0)
             {
@@ -34,7 +38,7 @@ namespace SimpleApplication.Controllers
             }
             else
             {
-                var applicationConfiguration = _unitOfWork.AppConfig.GetById(id);
+                var applicationConfiguration = await _mediator.Send(new GetApplicationConfigurationDetailRequest { Id = id });
                 if (applicationConfiguration == null)
                 {
                     return NotFound();
@@ -52,14 +56,13 @@ namespace SimpleApplication.Controllers
             {
                 if (id == 0)
                 {
-                    _unitOfWork.AppConfig.Add(applicationConfiguration);
-                    _unitOfWork.Save();
+                    var command = new CreateApplicationConfigurationCommand { ApplicationConfiguration = applicationConfiguration };
+                    _mediator.Send(command);
                 }
                 else
                 {
-                    _unitOfWork.AppConfig.Update(applicationConfiguration);
-                    _unitOfWork.Save();
-                    
+                    var command = new UpdateApplicationConfigurationCommand { applicationConfiguration = applicationConfiguration };
+                    _mediator.Send(command);
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -68,8 +71,8 @@ namespace SimpleApplication.Controllers
 
         public IActionResult Delete(int id)
         {
-            _unitOfWork.AppConfig.Delete(id);
-            _unitOfWork.Save();
+            var command = new DeleteApplicationConfigurationCommand { Id = id };
+            _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
 

@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Features.ConfigurationDefinitions.Request.Commands;
+using DataAccess.Features.ConfigurationDefinitions.Request.Queries;
 using DataAccess.Repository.IRepository;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,21 +16,23 @@ namespace SimpleApplication.Controllers
 {
     public class ConfigurationDefinitionController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMediator _mediator;
 
-        public ConfigurationDefinitionController(IUnitOfWork unitOfWork)
+        public ConfigurationDefinitionController(IMediator mediator)
         {
-            _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         // GET: ConfigurationDefinition
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult<List<ConfigurationDefinition>>> Index()
         {
-            IEnumerable<ConfigurationDefinition> objConfigurationDefinitionList = _unitOfWork.ConfigDefinition.GetAll();
-            return View(objConfigurationDefinitionList);
+            var configurationDefinitions = await _mediator.Send(new GetConfigurationDefinitionListRequest());
+            return View(configurationDefinitions);
         }
 
-        public IActionResult AddOrEdit(int id=0)
+        [HttpGet]
+        public async Task<ActionResult<List<ConfigurationDefinition>>> AddOrEdit(int id = 0)
         {
             if (id == 0)
             {
@@ -35,7 +40,7 @@ namespace SimpleApplication.Controllers
             }
             else
             {
-                var configurationDefinition = _unitOfWork.ConfigDefinition.GetById(id);
+                var configurationDefinition = await _mediator.Send(new GetConfigurationDefinitionDetailRequest { Id = id });
                 if (configurationDefinition == null)
                 {
                     return NotFound();
@@ -52,13 +57,13 @@ namespace SimpleApplication.Controllers
             {
                 if (id == 0)
                 {
-                    _unitOfWork.ConfigDefinition.Add(configurationDefinition);
-                    _unitOfWork.Save();
+                    var command = new CreateConfigurationDefinitionCommand { configurationDefinition = configurationDefinition };
+                    _mediator.Send(command);
                 }
                 else
                 {
-                    _unitOfWork.ConfigDefinition.Update(configurationDefinition);
-                    _unitOfWork.Save();
+                    var command = new UpdateConfigurationDefinitionCommand { configurationDefinition = configurationDefinition };
+                    _mediator.Send(command);
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -67,8 +72,8 @@ namespace SimpleApplication.Controllers
 
         public IActionResult Delete(int id)
         {
-            _unitOfWork.ConfigDefinition.Delete(id);
-            _unitOfWork.Save();
+            var command = new DeleteConfigurationDefinitionCommand { Id = id };
+            _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
 

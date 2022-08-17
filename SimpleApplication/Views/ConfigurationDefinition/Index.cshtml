@@ -34,7 +34,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.LastUpdateDateTime)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -61,9 +61,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LastUpdateDateTime)
             </td>
-            <td>
-                <a class="btn btn-info text-white" asp-action="AddOrEdit" asp-route-id="@item.ID"><i class="bi bi-pencil-square"></i></a>
-                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.ID" onclick="confirm(@item.ID)" ><i class="bi bi-trash"></i></a>
+            <td class="text-center">
+                <a class="text-gray-600" asp-action="AddOrEdit" asp-route-id="@item.ID"><i class="bi bi-pencil-square"></i></a>
+                <a class="text-gray-600" asp-action="Delete" asp-route-id="@item.ID" onclick="return confirm(@item.ID)" ><i class="bi bi-trash"></i></a>
             </td>
         </tr>
 }
@@ -76,7 +76,7 @@
 <script>
     $(document).ready( function () {
     $('#configDetail').DataTable({
-       
+       "scrollX": true,
     });
     } );
 </script>
